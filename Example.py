@@ -2,7 +2,7 @@ from pyexcel.ExcelExport import *
 
 from pyexcel.Config import *
 
-excel_path = "./"
+excel_path = "./output/"
 excel_name = "example.xlsx"
 
 
