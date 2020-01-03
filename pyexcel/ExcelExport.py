@@ -6,7 +6,7 @@ import os
 import time
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
-
+from openpyxl.chart import BarChart, Series, Reference
 from .Config import *
 
 class ExcelUtil(object):
@@ -88,6 +88,46 @@ class ExcelUtil(object):
     def merge_cells(self, sheet, start_row, start_column, end_row, end_column):
         sheet = self.wb[sheet]
         sheet.merge_cells(start_row=start_row, start_column=start_column, end_row=end_row, end_column=end_column)
+
+
+    def draw_bar(self, sheet_name):
+        """
+            数据必须为列。。。不知道为啥。。
+        """
+        ws = self.wb[sheet_name]
+
+        # 数据所在列的坐标范围， 包含label
+        DATA_COL_MIN = 1
+        DATA_COL_MAX = DATA_COL_MIN + 1
+        DATA_ROW_MIN = 3
+        DATA_ROW_MAX = 6
+
+        # label 所在范围
+        LABEL_COL_MIN = 1
+        LABEL_COL_MAX = LABEL_COL_MIN
+        LABEL_ROW_MIN = 3
+        LABEL_ROW_MAX = 6
+
+        chart1 = BarChart()
+
+        # 竖直的柱状图
+        chart1.type = "col"
+        chart1.style = 10
+        chart1.title = "Bar Chart"
+        chart1.y_axis.title = 'number'
+        chart1.x_axis.title = 'Sample length (mm)'
+
+        data = Reference(ws, min_col=DATA_COL_MIN, max_col=DATA_COL_MAX, min_row=DATA_ROW_MIN, max_row=DATA_ROW_MAX)
+        cats = Reference(ws, min_col=LABEL_COL_MIN, max_col=LABEL_COL_MAX, min_row=LABEL_ROW_MIN, max_row=LABEL_ROW_MAX)
+
+        chart1.add_data(data, titles_from_data=True)
+        chart1.set_categories(cats)
+
+        chart1.shape = 4
+
+        # 显示位置
+        ws.add_chart(chart1, "A10")
+
 
     # 自动保存文件
     def save(self):

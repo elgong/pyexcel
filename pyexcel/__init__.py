@@ -1,1 +1,1 @@
-__all__  = ["Config", "ExcelExport.py"]
+__all__ = ["Config", "ExcelExport"]

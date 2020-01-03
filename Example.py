@@ -20,7 +20,7 @@ def main():
     # 1. 设置主标题
     base_row = 1
     base_col = 1
-    new_sheet_list = ["sheet-1", "sheet-2", "sheet-3"]
+    new_sheet_list = ["sheet-1"]
     for sheet_name in new_sheet_list:
         excelUtil.merge_cells(sheet_name, base_row, base_col, base_row, base_row+4)
         excelUtil.set_cell(sheet_name, 1, 1, value="Example"+sheet_name, fill="yellow", font="title", border=None,
@@ -32,13 +32,13 @@ def main():
     base_col = 2
     level_2_col_list = ["col-1", "col-2", "col-3", "col-4"]
     for sheet_name in new_sheet_list:
-        for col_offer, value in enumerate(level_2_col_list):
-            excelUtil.set_cell(sheet_name, base_row, base_col+col_offer, value=value, fill="dark_blue", font="white_bold",
+        for col_offset, value in enumerate(level_2_col_list):
+            excelUtil.set_cell(sheet_name, base_row, base_col+col_offset, value=value, fill="dark_blue", font="white_bold",
                                border=None,
                                alignment="center"
              )
             # 调整列间距
-            excelUtil.set_col_weight(sheet_name, base_col+col_offer, 20)
+            excelUtil.set_col_weight(sheet_name, base_col+col_offset, 20)
 
 
     # 3. 一级行标
@@ -46,17 +46,29 @@ def main():
     base_col = 1
     level_2_row_list = ["row-1", "row-2", "row-3", "row-4"]
     for sheet_name in new_sheet_list:
-        for row_offer, value in enumerate(level_2_row_list):
-            excelUtil.set_cell(sheet_name, base_row + row_offer, base_col, value=value, fill="dark_blue", font="white_bold",
+        for row_offset, value in enumerate(level_2_row_list):
+            excelUtil.set_cell(sheet_name, base_row + row_offset, base_col, value=value, fill="dark_blue", font="white_bold",
                                border=None,
                                alignment="center"
              )
             # 调整行间距
-            excelUtil.set_col_weight(sheet_name, base_row + row_offer, 15)
+            excelUtil.set_col_weight(sheet_name, base_row + row_offset, 15)
 
-    # excelUtil.set_cell(sheet="sheet1", row=1, col=2, value="456", fill="red")
+
+    base_col = 2
+    base_row = 3
+    # data
+    for offset in range(4):
+        excelUtil.set_cell("sheet-1", base_row+offset, base_col, value=offset+5)
+
+    excelUtil.draw_bar("sheet-1")
     excelUtil.save()
 
 if __name__ == "__main__":
 
     main()
+
+
+
+
+
