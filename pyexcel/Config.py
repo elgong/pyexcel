@@ -52,8 +52,6 @@ font_styles = {
     "white_bold": Font(u'宋体', size=11, bold=True, italic=False, strike=False, color='FFFFFF'),
 
     # 这里添加其他样式字体
-
-
 }
 
 
