@@ -31,6 +31,15 @@ class Styles(object):
         # 在这里添加其他背景颜色，颜色表可查 http://www.365jz.com/article/24452
     }
 
+    # 单元格对齐方式
+    # 居中，自动换行
+    cell_alignment = {
+        "center": Alignment(
+            horizontal='center', vertical='center', text_rotation=0, wrap_text=True, shrink_to_fit=False,
+            indent=0
+        ),
+    }
+
     def __init__(self):
         pass
 
@@ -42,7 +51,7 @@ class Styles(object):
             raise Exception("Background_color Error!")
 
     # 字体风格
-    def set_font(self, _font=u'Calibri', _size=12, _bold=False, _italic=False, _strike=False, _color="black"):
+    def set_font(self, font=u'Calibri', size=12, bold=False, italic=False, strike=False, color="black"):
         """
         功能: 字体风格设置, 字体，大小，加粗，斜体， 下划线，颜色等
             参数名: [可选参数,]
@@ -53,48 +62,22 @@ class Styles(object):
             _strike: 下划线
             _color:  字体颜色
         """
-        if _color == "black":  # 默认白色
-            _color_para = "000000"
-        elif _color == "white":
-            _color_para ="FFFFFF"
+        if color == "black":  # 默认白色
+            color_para = "000000"
+        elif color == "white":
+            color_para ="FFFFFF"
         else:
             raise Exception("Font color Error !")
 
-        return Font(_font, size=_size, bold=_bold, italic=_italic, strike=_strike, color=_color_para)
+        return Font(font, size=size, bold=bold, italic=italic, strike=strike, color=color_para)
 
-        # 单元格对齐方式
-        # """
-        # horizontal   水平方向
-        # vertical    垂直方向
-        # """
-        # cell_alignment = {
-        #     "center": Alignment(
-        #         horizontal='center', vertical='center', text_rotation=0, wrap_text=False, shrink_to_fit=False,
-        #         indent=0
-        #     ),
-        #
-        # }
+    # 单元格对齐
+    def set_cell_alignment(self, alignment="center"):
+        try:
+            return self.cell_alignment[alignment]
+        except:
+            raise Exception("Alignment Error ！")
 
-
-        # font_styles = {
-        #
-        #     # """ 标题字体 """
-        #     "title": Font(u'Calibri', size=26, bold=True, italic=False, strike=False, color='000000'),
-        #
-        #     # """  内容字体 """
-        #     # 黑色  宋体
-        #     "black": Font(u'宋体', size=11, bold=False, italic=False, strike=False, color='000000'),
-        #
-        #     # 黑色  宋体 加粗
-        #     "black_bold": Font(u'宋体', size=11, bold=True, italic=False, strike=False, color='000000'),
-        #
-        #     # 白色  宋体
-        #     "white": Font(u'宋体', size=11, bold=False, italic=False, strike=False, color='FFFFFF'),
-        #     # 白色  宋体  加粗
-        #     "white_bold": Font(u'宋体', size=11, bold=True, italic=False, strike=False, color='FFFFFF'),
-        #
-        #     # 这里添加其他样式字体
-        # }
 
 
 
